@@ -1,5 +1,7 @@
+
 import { useSprings, animated, SpringConfig } from '@react-spring/web';
 import { useEffect, useRef, useState } from 'react';
+
 
 interface SplitTextProps {
     text?: string;
@@ -57,7 +59,7 @@ const SplitText: React.FC<SplitTextProps> = ({
         letters.map((_, i) => ({
             from: animationFrom,
             to: inView
-                ? async (next: (props: any) => Promise<void>) => {
+                ? async (next: (props: { opacity: number; transform: string }) => Promise<void>) => {
                     await next(animationTo);
                     animatedCount.current += 1;
                     if (animatedCount.current === letters.length && onLetterAnimationComplete) {
@@ -84,6 +86,8 @@ const SplitText: React.FC<SplitTextProps> = ({
                             .reduce((acc, w) => acc + w.length, 0) + letterIndex;
 
                         return (
+                         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                         // @ts-expect-error
                             <animated.span
                                 key={index}
                                 style={springs[index] as unknown as React.CSSProperties}

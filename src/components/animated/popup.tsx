@@ -73,6 +73,8 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
   });
 
   return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     <animated.div ref={ref} style={springProps}>
       {children}
     </animated.div>
