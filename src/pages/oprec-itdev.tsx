@@ -2,7 +2,7 @@ import Stepper, { Step } from "@/components/animated/stepper";
 import { useForm, FormProvider } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/firebase/init";
-import { useState} from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 type FormValues = {
@@ -93,7 +93,7 @@ function OprecITDEV() {
                                 />
                                 {errors.Name && (
                                     <p className="text-red-500 mt-1">
-                                        {errors.Name.message} 
+                                        {errors.Name.message}
                                     </p>
                                 )}
                             </div>
@@ -119,7 +119,9 @@ function OprecITDEV() {
                                     className="p-2 rounded bg-gray-800 text-white w-full mt-2 mb-4"
                                 />
                                 {errors.Github_Email && (
-                                    toast.error(errors.Github_Email.message)
+                                    <p className="text-red-500 mt-1">
+                                        {errors.Github_Email.message}
+                                    </p>
                                 )}
                                 <input
                                     {...methods.register("Default_Email", {
