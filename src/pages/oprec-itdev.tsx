@@ -4,7 +4,8 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/firebase/init";
 import { useState } from "react";
 import { toast } from "react-toastify";
-
+import ShinyText from "@/components/Words/ShinnyText";
+import router from "next/router"
 type FormValues = {
     Name: string;
     Github_Email: string;
@@ -30,6 +31,7 @@ function OprecITDEV() {
             await addDoc(collection(db, "registrations"), data);
             toast.success("Form submitted successfully!");
             methods.reset();
+            router.push("/")
         } catch {
             toast.error("Failed to submit form. Please try again later.");
         }
@@ -47,7 +49,7 @@ function OprecITDEV() {
     return (
         <div className="h-full w-full min-h-screen bg-zinc-900 text-white">
             <header className="p-4">
-                <h1 className="text-2xl font-bold">Oprec ITDEV Registration</h1>
+                <ShinyText text="OPREC ITDEV ECS 2025/2026" disabled={false} speed={3} className='custom-class font-bold text-2xl' />
             </header>
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -57,7 +59,10 @@ function OprecITDEV() {
                             const isValid = await validateStep(step - 1);
                             if (isValid) setCurrentStep(step);
                         }}
-                        onFinalStepCompleted={methods.handleSubmit(onSubmit)}
+                        onFinalStepCompleted={
+
+                            methods.handleSubmit(onSubmit)
+                        }
                         backButtonText="Previous"
                         nextButtonText={currentStep === 3 ? "Submit" : "Next"}
                         backButtonProps={{ disabled: currentStep === 1 }}
@@ -98,15 +103,11 @@ function OprecITDEV() {
                                 )}
                             </div>
                         </Step>
-
-                        {/* Step 3 - Contact Info */}
                         <Step>
                             <div className="p-4">
                                 <h2 className="text-xl font-semibold">
                                     Step 3: Contact Information
                                 </h2>
-
-                                {/* Github Email */}
                                 <input
                                     {...methods.register("Github_Email", {
                                         required: "Github Email is required",
